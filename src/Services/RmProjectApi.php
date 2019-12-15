@@ -18,7 +18,7 @@ namespace Kimengumi\RedmineClientBundle\Services;
 
 use Redmine\Api\Project;
 
-class RedmineProjectApi extends Project {
+class RmProjectApi extends Project {
 
 	/**
 	 * @param $projectId
@@ -35,7 +35,7 @@ class RedmineProjectApi extends Project {
 		$directRoles  = [];
 
 		// Get existing roles for the user
-		$allMembers = $this->getCollection( '/projects/' . (int) $projectId . '/memberships' );
+		$allMembers = $this->client->api->getCollection( '/projects/' . (int) $projectId . '/memberships' );
 		foreach ( $allMembers as $oneMember ) {
 			if ( ( isset( $oneMember['user'] ) && ( $oneMember['user']['id'] == $userId ) ) ||
 			     ( isset( $oneMember['group'] ) && ( $oneMember['group']['id'] == $userId ) ) ) {
@@ -58,17 +58,17 @@ class RedmineProjectApi extends Project {
 		$directRoles[ $roleId ] = true;
 
 		if ( $membershipId ) {
-			$run = $this->membership->update( $membershipId, [
+			$run = $this->client->membership->update( $membershipId, [
 				'role_ids' => array_keys( $directRoles )
 			] );
 		} else {
-			$run = $this->membership->create( $projectId, [
+			$run = $this->client->membership->create( $projectId, [
 				'user_id'  => $userId,
 				'role_ids' => array_keys( $directRoles ),
 			] );
 		}
 
 		// Error
-		return $this->haveError( $run, 'PUT', 'membership' );
+		return $this->client->haveError( $run, 'PUT', 'membership' );
 	}
 }

@@ -18,9 +18,7 @@ namespace Kimengumi\RedmineClientBundle\Services;
 use Redmine\Api\AbstractApi;
 use Redmine\Client;
 
-class RedmineGenericApi extends AbstractApi {
-
-
+class RmGenericApi extends AbstractApi {
 
 	/**
 	 * Generic function for retrieving all the elements of any given endpoint returning a list of elements
@@ -35,7 +33,7 @@ class RedmineGenericApi extends AbstractApi {
 	 *
 	 * @return array elements found
 	 */
-	public function getCollection( $endpoint, array $params = [], $extraGetParams = null, $pagination = RedmineClient::DEFAULT_PAGINATION, $collectionOnly = true ) {
+	public function getCollection( $endpoint, array $params = [], $extraGetParams = null, $pagination = RmClient::DEFAULT_PAGINATION, $collectionOnly = true ) {
 
 		$params['set_filter'] = 1;
 		$limit                = $params['limit'] ?? PHP_INT_MAX;
@@ -90,7 +88,7 @@ class RedmineGenericApi extends AbstractApi {
 			$path .= '?' . preg_replace( '/%5B[0-9]+%5D/simU', '%5B%5D', http_build_query( $params ) );
 		}
 
-		$result = (array) $this->get( $path );
+		$result = (array) $this->client->get( $path );
 
 		return $result[ $singleName ] ?? null;
 	}
@@ -112,7 +110,7 @@ class RedmineGenericApi extends AbstractApi {
 
 		$this->output->writeln( self::arrayToXml( $data, $singleName ) );
 
-		return $this->runRequest( $endpoint . '/' . $id . '.xml', 'PUT', self::arrayToXml( $data, $singleName ) );
+		return $this->client->put( $endpoint . '/' . $id . '.xml', self::arrayToXml( $data, $singleName ) );
 
 	}
 
@@ -130,9 +128,9 @@ class RedmineGenericApi extends AbstractApi {
 			$endpoint = $singleRecordName . 's';
 		}
 
-		return $this->runRequest( $endpoint . '.xml', 'POST', self::arrayToXml( $data, $singleName ) );
-	}
 
+		return $this->client->post( $endpoint . '.xml', $this->client->utils->arrayToXml( $data, $singleName ) );
+	}
 
 
 }

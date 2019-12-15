@@ -15,8 +15,21 @@
 
 namespace Kimengumi\RedmineClientBundle\Services;
 
+use Redmine\Client;
 
-class RedmineUtils {
+class RmUtils {
+
+	/**
+	 * @var Client
+	 */
+	protected $client;
+
+	/**
+	 * @param Client $client
+	 */
+	public function __construct( Client $client ) {
+		$this->client = $client;
+	}
 
 	/**
 	 * Get custom filed value by custom field id, for a record returned by the redmine API
@@ -116,7 +129,7 @@ class RedmineUtils {
 
 		$params['set_filter'] = 1;
 
-		return $this->url . $endpoint . '?' . ( $extraGetParams ? $extraGetParams . '&' : '' ) .
+		return $this->client->getUrl() . $endpoint . '?' . ( $extraGetParams ? $extraGetParams . '&' : '' ) .
 		       preg_replace( '/%5B[0-9]+%5D/simU', '%5B%5D', http_build_query( $params ) );
 	}
 
@@ -126,7 +139,7 @@ class RedmineUtils {
 	 *
 	 * @return string
 	 */
-	public static function arrayToXml( array $data, string $rootTag ) {
+	public function arrayToXml( array $data, string $rootTag ) {
 		$xml = new \SimpleXMLElement( '<' . $rootTag . '/>' );
 		self::arrayNodeToXmlNode( $xml, $data );
 
@@ -137,7 +150,7 @@ class RedmineUtils {
 	 * @param SimpleXMLElement $object
 	 * @param array $data
 	 */
-	public static function arrayNodeToXmlNode( \SimpleXMLElement &$object, array $data ) {
+	public function arrayNodeToXmlNode( \SimpleXMLElement &$object, array $data ) {
 		foreach ( $data as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$new_object = $object->addChild( $key );

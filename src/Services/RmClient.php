@@ -20,7 +20,14 @@ use Html2Text\Html2Text;
 use Symfony\Component\Cache\Simple\FilesystemCache;
 use Symfony\Component\Console\Output\OutputInterface;
 
-Class RedmineClient extends \Redmine\Client {
+/**
+ * Class RedmineClient
+ * @package Kimengumi\RedmineClientBundle\Services
+ * @property RmGenericApi $api
+ * @property RmProjectApi $project
+ * @property RmUtils $utils
+ */
+Class RmClient extends \Redmine\Client {
 
 	public const DEFAULT_PAGINATION = 100;
 
@@ -72,9 +79,9 @@ Class RedmineClient extends \Redmine\Client {
 	 * @var array
 	 */
 	private $classes = [
-		'api'     => 'RedmineGenericApi',
-		'project' => 'RedmineProjectApi',
-		'utils'   => 'RedmineUtils'
+		'api'     => 'RmGenericApi',
+		'project' => 'RmProjectApi',
+		'utils'   => 'RmUtils'
 	];
 
 	/**
@@ -86,7 +93,7 @@ Class RedmineClient extends \Redmine\Client {
 	 */
 	public function __construct( $url, $apikeyOrUsername, $pass = null, $fileCacheLifetime = 3600, $projectDir = './' ) {
 
-		$this->url = $url;
+		$this->url       = $url;
 		$this->fileCache = new FilesystemCache( md5( $this->url ), $fileCacheLifetime, $projectDir . '/var/cache/redmine' );
 
 		return parent::__construct( $this->url, $apikeyOrUsername, $pass );
