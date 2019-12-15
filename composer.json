@@ -1,0 +1,25 @@
+{
+    "name": "kimengumi/redmine-client-bundle",
+    "description": "Redmine API client bundle for Symfony",
+    "homepage": "https://github.com/kimengumi/redmine-client-bundle",
+    "type": "symfony-bundle",
+    "require": {
+        "php": ">=7.0",
+        "kbsali/redmine-api": "^1.5",
+        "html2text/html2text": "^4.2",
+        "symfony/framework-bundle": "^3.4",
+    },
+    "autoload": {
+        "psr-4": {
+            "Kimengumi\\RedmineClientBundle\\": "src"
+        }
+    },
+    "license": "EUPL 1.2",
+    "authors": [
+        {
+            "name": "Antonio Rossetti",
+            "email": "antonio@kimengumi.fr",
+            "homepage": "https://www.kimengumi.fr"
+        }
+    ]
+}

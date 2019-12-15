@@ -1,0 +1,5 @@
+services:
+  redmine.client:
+    class: Kimengumi\RedmineClientBundle\Services\Redmine\RedmineClient
+    arguments: ['%redmine.url%','%redmine.key%',null ,'%redmine.cacheLifetime%','%kernel.project_dir%']
+    public: true
