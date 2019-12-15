@@ -13,7 +13,7 @@
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
 
-namespace Kimengumi\RedmineClientBundle\Services\Redmine;
+namespace Kimengumi\RedmineClientBundle\Services;
 
 
 class RedmineUtils {

@@ -13,12 +13,12 @@
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
 
-namespace Kimengumi\RedmineClientBundle\Services\Redmine;
+namespace Kimengumi\RedmineClientBundle\Services;
 
 use Redmine\Api\AbstractApi;
 use Redmine\Client;
 
-class GenericApi extends AbstractApi {
+class RedmineGenericApi extends AbstractApi {
 
 
 

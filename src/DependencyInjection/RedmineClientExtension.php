@@ -38,6 +38,6 @@ class RedmineClientExtension extends Extension {
 
 		$container->setParameter( sprintf( '%s.url', $this->getAlias() ), $config['url'] );
 		$container->setParameter( sprintf( '%s.token', $this->getAlias() ), $config['key'] );
-		$container->setParameter( sprintf( '%s.token', $this->getAlias() ), $config['cacheLifetime'] );
+		$container->setParameter( sprintf( '%s.token', $this->getAlias() ), $config['cachelifetime'] );
 	}
 }

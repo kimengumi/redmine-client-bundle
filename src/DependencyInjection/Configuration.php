@@ -29,12 +29,11 @@ class Configuration implements ConfigurationInterface {
 	 */
 	public function getConfigTreeBuilder() {
 		$treeBuilder = new TreeBuilder();
-		$rootNode    = $treeBuilder->root( 'redmine' );
-		$rootNode->children()
-		         ->scalarNode( 'url' )->isRequired()->end()
-		         ->scalarNode( 'key' )->isRequired()->end()
-		         ->scalarNode( 'cacheLifetime' )->defaultValue( 3600 )->end()
-		         ->end();
+		$treeBuilder->root( 'redmine_client' )->children()
+			->scalarNode( 'url' )->isRequired()->end()
+			->scalarNode( 'key' )->isRequired()->end()
+			->integerNode( 'cachelifetime' )->defaultValue( 3600 )->end()
+			->end();
 
 		return $treeBuilder;
 	}

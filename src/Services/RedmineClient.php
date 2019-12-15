@@ -14,7 +14,7 @@
  */
 
 
-namespace Kimengumi\RedmineClientBundle\Services\Redmine;
+namespace Kimengumi\RedmineClientBundle\Services;
 
 use Html2Text\Html2Text;
 use Symfony\Component\Cache\Simple\FilesystemCache;

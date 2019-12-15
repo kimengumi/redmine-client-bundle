@@ -13,12 +13,12 @@
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
 
-namespace Kimengumi\RedmineClientBundle\Services\Redmine;
+namespace Kimengumi\RedmineClientBundle\Services;
 
 
 use Redmine\Api\Project;
 
-class ProjectApi extends Project {
+class RedmineProjectApi extends Project {
 
 	/**
 	 * @param $projectId
