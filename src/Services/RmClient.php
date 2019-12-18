@@ -260,7 +260,14 @@ Class RmClient extends \Redmine\Client {
 			$apiReturn = array();
 		}
 
-		$error = ( $httpResponseCode !== 200 ) ? '' : false;
+		switch ( $httpResponseCode ) {
+			case 200:
+			case 201:
+				$error = false;
+				break;
+			default:
+				$error = '';
+		}
 		if ( isset( $apiReturn->error ) ) {
 			$error = $apiReturn->error;
 		} elseif ( isset( $apiReturn->errors ) ) {
@@ -274,7 +281,7 @@ Class RmClient extends \Redmine\Client {
 		if ( $error !== false ) {
 			if ( $this->output ) {
 				if ( $method || $path ) {
-					$this->output->writeln( '<fg=red>[RDM] ' . $method . ' ' . $path . ( $httpResponseCode !== 200 ? ' (HTTP ' . $httpResponseCode . ')' : '' ) . '</>', OutputInterface::VERBOSITY_QUIET );
+					$this->output->writeln( '<fg=red>[RDM] ' . $method . ' ' . $path . ' (HTTP ' . $httpResponseCode . ')</>', OutputInterface::VERBOSITY_QUIET );
 				}
 				if ( $error ) {
 					$this->output->writeln( '<fg=red>          ' . $error . '</>', OutputInterface::VERBOSITY_QUIET );
