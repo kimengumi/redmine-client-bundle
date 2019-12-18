@@ -108,9 +108,7 @@ class RmGenericApi extends AbstractApi {
 			$endpoint = $singleName . 's';
 		}
 
-		$this->output->writeln( self::arrayToXml( $data, $singleName ) );
-
-		return $this->client->put( $endpoint . '/' . $id . '.xml', self::arrayToXml( $data, $singleName ) );
+		return $this->client->put( $endpoint . '/' . $id . '.xml', $this->prepareParamsXml( $data, $singleName )->asXML() );
 
 	}
 
@@ -128,8 +126,26 @@ class RmGenericApi extends AbstractApi {
 			$endpoint = $singleRecordName . 's';
 		}
 
+		return $this->client->post( $endpoint . '.xml', $this->prepareParamsXml( $data, $singleName )->asXML() );
+	}
 
-		return $this->client->post( $endpoint . '.xml', $this->client->utils->arrayToXml( $data, $singleName ) );
+	/**
+	 * @param array $params
+	 *
+	 * @return \SimpleXMLElement
+	 */
+	protected function prepareParamsXml( $params, string $rootTag ) {
+
+		$xml = new \SimpleXMLElement( '<' . $rootTag . '/>' );
+		foreach ( $params as $k => $v ) {
+			if ( 'custom_fields' === $k && is_array( $v ) ) {
+				$this->attachCustomFieldXML( $xml, $v );
+			} else {
+				$xml->addChild( $k, $v );
+			}
+		}
+
+		return $xml;
 	}
 
 

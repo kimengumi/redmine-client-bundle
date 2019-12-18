@@ -132,32 +132,4 @@ class RmUtils {
 		return $this->client->getUrl() . $endpoint . '?' . ( $extraGetParams ? $extraGetParams . '&' : '' ) .
 		       preg_replace( '/%5B[0-9]+%5D/simU', '%5B%5D', http_build_query( $params ) );
 	}
-
-	/**
-	 * @param array $data
-	 * @param $rootTag
-	 *
-	 * @return string
-	 */
-	public function arrayToXml( array $data, string $rootTag ) {
-		$xml = new \SimpleXMLElement( '<' . $rootTag . '/>' );
-		self::arrayNodeToXmlNode( $xml, $data );
-
-		return $xml->asXML();
-	}
-
-	/**
-	 * @param SimpleXMLElement $object
-	 * @param array $data
-	 */
-	public function arrayNodeToXmlNode( \SimpleXMLElement &$object, array $data ) {
-		foreach ( $data as $key => $value ) {
-			if ( is_array( $value ) ) {
-				$new_object = $object->addChild( $key );
-				self::arrayNodeToXmlNode( $new_object, $value );
-			} else {
-				$object->addChild( $key, $value );
-			}
-		}
-	}
 }
