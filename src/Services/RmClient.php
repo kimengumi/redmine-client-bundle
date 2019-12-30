@@ -247,7 +247,7 @@ Class RmClient extends \Redmine\Client {
 	 * @param null $method
 	 * @param null $path
 	 */
-	protected function haveError( $apiReturn, $method = null, $path = null ) {
+	public function haveError( $apiReturn, $method = null, $path = null ) {
 
 		$httpResponseCode = $this->getResponseCode();
 		$unknownContent   = null;
