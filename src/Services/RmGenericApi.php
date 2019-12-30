@@ -60,7 +60,7 @@ class RmGenericApi extends AbstractApi {
 			if ( empty( $newDataSet ) || ! isset( $newDataSet['limit'] ) || (
 					isset( $newDataSet['offset'] ) &&
 					isset( $newDataSet['total_count'] ) &&
-					$newDataSet['offset'] >= $newDataSet['total_count']
+					( $newDataSet['offset'] + $newDataSet['limit'] ) >= $newDataSet['total_count']
 				)
 			) {
 				$limit = 0;
