@@ -45,7 +45,7 @@ class RmUtils {
 		if ( isset( $entity['custom_fields'] ) ) {
 			foreach ( $entity['custom_fields'] as $customField ) {
 				if ( (int) $customField['id'] == (int) $customFieldId ) {
-					return $customField['value'] ?? $defaultValue;
+					return ( isset( $customField['value'] ) && !empty( $customField['value'] ) ) ? $customField['value'] : $defaultValue;
 				}
 			}
 		}
