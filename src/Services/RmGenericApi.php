@@ -130,6 +130,17 @@ class RmGenericApi extends AbstractApi {
 	}
 
 	/**
+	 * @param string $endpoint
+	 * @param int $id
+	 *
+	 * @return bool|false|\SimpleXMLElement|string
+	 */
+	public function deleteOne( string $endpoint, int $id ) {
+
+		return $this->client->delete( $endpoint . '/' . $id . '.xml' );
+	}
+
+	/**
 	 * @param array $params
 	 *
 	 * @return \SimpleXMLElement
