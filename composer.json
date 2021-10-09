@@ -4,8 +4,8 @@
   "homepage": "https://github.com/kimengumi/redmine-client-bundle",
   "type": "symfony-bundle",
   "require": {
-    "php": ">=7.0",
-    "kbsali/redmine-api": "^1.5",
+    "php": "^7.4.0",
+    "kbsali/redmine-api": "1.5.*||1.6.*",
     "html2text/html2text": "^4.2",
     "symfony/framework-bundle": "^3.4"
   },
