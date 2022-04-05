@@ -123,7 +123,7 @@ class RmGenericApi extends AbstractApi {
 	public function create( string $singleName, array $data, string $endpoint = null ) {
 
 		if ( ! $endpoint ) {
-			$endpoint = $singleRecordName . 's';
+			$endpoint = $singleName . 's';
 		}
 
 		return $this->client->post( $endpoint . '.xml', $this->prepareParamsXml( $data, $singleName )->asXML() );
@@ -147,12 +147,33 @@ class RmGenericApi extends AbstractApi {
 	 */
 	protected function prepareParamsXml( $params, string $rootTag ) {
 
+		$arrayItemKeyMap = [
+			'tracker_ids'            => 'tracker',
+			'issue_custom_field_ids' => 'issue_custom_field',
+			'watcher_user_ids'       => 'watcher_user_id',
+			'user_ids'               => 'user_id',
+			'uploads'                => 'upload',
+		];
+
 		$xml = new \SimpleXMLElement( '<' . $rootTag . '/>' );
-		foreach ( $params as $k => $v ) {
-			if ( 'custom_fields' === $k && is_array( $v ) ) {
-				$this->attachCustomFieldXML( $xml, $v );
+		foreach ( $params as $key => $value ) {
+			if ( 'custom_fields' === $key && is_array( $value ) ) {
+				$this->attachCustomFieldXML( $xml, $value );
+			} elseif ( is_array( $value ) ) {
+				$valueItem = $xml->addChild( $key, '' );
+				$valueItem->addAttribute( 'type', 'array' );
+				foreach ( $value as $valueChild ) {
+					if ( is_array( $valueChild ) ) {
+						$valueChildItem = $valueItem->addChild( $arrayItemKeyMap[ $key ] ?? $key, '' );
+						foreach ( $valueChild as $valueChildKey => $valueChildValue ) {
+							$valueChildItem->addChild( $valueChildKey, $valueChildValue );
+						}
+					} else {
+						$valueItem->addChild( $arrayItemKeyMap[ $key ] ?? $key, $valueChild );
+					}
+				}
 			} else {
-				$xml->addChild( $k, $v );
+				$xml->addChild( $key, $value );
 			}
 		}
 
