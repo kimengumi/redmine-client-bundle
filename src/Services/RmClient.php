@@ -263,6 +263,7 @@ Class RmClient extends \Redmine\Client {
 		switch ( $httpResponseCode ) {
 			case 200:
 			case 201:
+			case 204:
 				$error = false;
 				break;
 			default:
