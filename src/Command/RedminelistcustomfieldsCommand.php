@@ -44,23 +44,21 @@ class RedminelistcustomfieldsCommand extends ContainerAwareCommand {
 		$rmCFs = $rm->api->getCollection( 'custom_fields' );
 
 		foreach ( $rmCFs as $rmCF ) {
-			if ( $rmCF['field_format'] == 'enumeration' ) {
-				$first = true;
+			if ( ($rmCF['field_format'] == 'enumeration') && isset($rmCF['possible_values']) ) {
 				foreach ( $rmCF['possible_values'] as $rmCFEnum ) {
 					$tableRows[ $rmCF['id'] . $rmCFEnum['value'] ] = [
-						'customized_type' => $first ? $rmCF['customized_type'] : null,
-						'id'              => $first ? $rmCF['id'] : null,
-						'name'            => $first ? $rmCF['name'] : null,
-						'field_format'    => $first ? $rmCF['field_format'] : null,
+						'customized_type' => $rmCF['customized_type'] ?? null,
+						'id'              => $rmCF['id'],
+						'name'            => $rmCF['name'],
+						'field_format'    => $rmCF['field_format'],
 						'enum_value'      => $rmCFEnum['value'],
 						'enum_label'      => $rmCFEnum['label'],
 
 					];
-					$first                                         = false;
 				}
 			} else {
 				$tableRows[ $rmCF['id'] ] = [
-					'customized_type' => $rmCF['customized_type'],
+					'customized_type' => $rmCF['customized_type'] ?? null,
 					'id'              => $rmCF['id'],
 					'name'            => $rmCF['name'],
 					'field_format'    => $rmCF['field_format'],

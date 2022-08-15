@@ -49,12 +49,13 @@ class RedminelistenumerationsCommand extends ContainerAwareCommand {
 				'IssuePriority',
 				'DocumentCategory',
 				'TimeEntryActivity',
-				'EasyPersonalFinancePaymentMethod',
 				'EasyInvoiceStatus',
 				'EasyInvoicePaymentMethod',
 				'EasyProjectPriority',
 				'EasyEntityActivityCategory',
-				'EasyCustomFieldGroup'
+				'EasyCustomFieldGroup',
+				'EasyVersionCategory',
+				'TestCaseIssueExecutionResult'
 			] as $enumType
 		) {
 			if ( $rmEnumerations = $rm->api->getCollection( 'enumerations/' . $enumType ) ) {
