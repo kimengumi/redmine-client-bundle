@@ -38,7 +38,7 @@ class RmGenericApi extends AbstractApi {
 		$params['set_filter'] = 1;
 		$limit                = $params['limit'] ?? PHP_INT_MAX;
 		$offset               = $params['offset'] ?? 0;
-		$ret                  = [];
+		$wsCollection         = [];
 
 		while ( $limit > 0 ) {
 			if ( $limit > $pagination ) {
@@ -54,7 +54,7 @@ class RmGenericApi extends AbstractApi {
 			$newDataSet = (array) $this->get(
 				$endpoint . '.json?' . ( $extraGetParams ? $extraGetParams . '&' : '' ) .
 				preg_replace( '/%5B[0-9]+%5D/simU', '%5B%5D', http_build_query( $params ) ) );
-			$ret        = array_merge_recursive( $ret, $newDataSet );
+            $wsCollection        = array_merge_recursive( $wsCollection, $newDataSet );
 
 			$offset += $_limit;
 			if ( empty( $newDataSet ) || ! isset( $newDataSet['limit'] ) || (
@@ -67,7 +67,17 @@ class RmGenericApi extends AbstractApi {
 			}
 		}
 
-		return ! $collectionOnly ? $ret : $ret[ $endpoint ] ?? reset( $ret ) ?? [];
+        // ensure unique records by ID
+        if(isset($wsCollection[$endpoint][0]['id'])) {
+            $retCollection = [];
+            foreach($wsCollection[$endpoint] as $record){
+                $retCollection[$endpoint][$record['id']]=$record;
+            }
+        }else{
+            $retCollection=$wsCollection;
+        }
+
+		return ! $collectionOnly ? $retCollection : $retCollection[ $endpoint ] ?? reset( $retCollection ) ?? [];
 	}
 
 	/**
