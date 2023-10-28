@@ -274,9 +274,9 @@ Class RmClient extends \Redmine\Client {
 		} elseif ( isset( $apiReturn->errors ) ) {
 			$error = $apiReturn->errors;
 		} elseif ( isset( $apiReturn['error'] ) ) {
-			$error = is_array( $apiReturn['error'] ) ? implode( $apiReturn['error'], "\n" ) : $apiReturn['error'];
+			$error = is_array( $apiReturn['error'] ) ? implode( "\n", $apiReturn['error'] ) : $apiReturn['error'];
 		} elseif ( isset( $apiReturn['errors'] ) ) {
-			$error = is_array( $apiReturn['errors'] ) ? implode( $apiReturn['errors'], "\n" ) : $apiReturn['errors'];
+			$error = is_array( $apiReturn['errors'] ) ? implode( "\n", $apiReturn['errors'] ) : $apiReturn['errors'];
 		}
 
 		if ( $error !== false ) {
