@@ -9,11 +9,13 @@ Symfony PHP wrapper for Redmine API :
 * Add extra class for generic/extra Redmine endpoints (ex: for usage of custom endpoints from Redmine plugins)
 * Add extra utils/methods, to facilitate common collections management (ex: Custom fields)
 
-### Current state of the project & roadmap
+#### Minimal Requirements
+- PHP 7.2
+- Symfony 3.4
 
-Originally indented to be used for a single project, the independent packaging is a work in progress.
-
-The bundle in actually still focusing on Symfony 3.4.x. further version support will come later.
+#### Tested on
+- PHP 7.2 / 7.4 / 8.1 / 8.4
+- Symfony 3.4 / 4.4 / 5.4 / 6.4 / 7.2
 
 License
 -------------

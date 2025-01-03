@@ -1,0 +1,64 @@
+#
+# Redmine API client bundle for Symfony
+#
+# NOTICE OF LICENSE
+#
+# Licensed under the EUPL, Version 1.2 or – as soon they will be approved by
+# the European Commission - subsequent versions of the EUPL (the "Licence");
+# You may not use this work except in compliance with the Licence.
+# You may obtain a copy of the Licence at:
+#
+# https://joinup.ec.europa.eu/software/page/eupl
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the Licence is distributed on an "AS IS" basis,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the Licence for the specific language governing permissions and
+# limitations under the Licence.
+#
+# @author Antonio Rossetti <antonio@rossetti.fr>
+# @copyright since 2017 Antonio Rossetti
+# @license <https://joinup.ec.europa.eu/software/page/eupl> EUPL
+#
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# formatter
+ij_formatter_tags_enabled = true
+
+# align
+ij_php_align_assignments = true
+ij_php_align_class_constants = true
+ij_php_align_group_field_declarations = true
+ij_php_align_key_value_pairs = true
+ij_php_align_multiline_extends_list = true
+
+# arrays
+ij_php_comma_after_last_array_element = true
+ij_php_force_short_declaration_array_style = true
+
+# braces
+ij_php_do_while_brace_force = always
+ij_php_for_brace_force = always
+ij_php_if_brace_force = always
+ij_php_while_brace_force = always
+
+# spaces
+ij_php_spaces_around_var_within_brackets = true
+ij_php_spaces_within_array_initializer_braces = true
+ij_php_spaces_within_catch_parentheses = true
+ij_php_spaces_within_for_parentheses = true
+ij_php_spaces_within_if_parentheses = true
+ij_php_spaces_within_method_call_parentheses = true
+ij_php_spaces_within_method_parentheses = true
+ij_php_spaces_within_parentheses = true
+ij_php_spaces_within_short_echo_tags = true
+ij_php_spaces_within_switch_parentheses = true
+ij_php_spaces_within_while_parentheses = true

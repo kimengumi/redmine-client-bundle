@@ -1,5 +1,17 @@
 services:
-  redmine.client:
-    class: Kimengumi\RedmineClientBundle\Services\RmClient
-    arguments: ['%redmine.url%','%redmine.key%',null ,'%redmine.cacheLifetime%','%kernel.project_dir%']
-    public: true
+    redmine.client:
+        class: Kimengumi\RedmineClientBundle\Services\RmClient
+        arguments: [ '%redmine_client.url%','%redmine_client.key%',null ,'%redmine_client.cachelifetime%','%kernel.project_dir%' ]
+        public: true
+
+    Kimengumi\RedmineClientBundle\Command\RedminelistcustomfieldsCommand:
+        arguments:
+            $rmClient: '@redmine.client'
+        tags:
+            - { name: 'console.command', command: 'redmine:list:customfields' }
+
+    Kimengumi\RedmineClientBundle\Command\RedminelistenumerationsCommand:
+        arguments:
+            $rmClient: '@redmine.client'
+        tags:
+            - { name: 'console.command', command: 'redmine:list:enumerations' }

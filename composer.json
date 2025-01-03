@@ -1,25 +1,26 @@
 {
-  "name": "kimengumi/redmine-client-bundle",
-  "description": "Redmine API client bundle for Symfony",
-  "homepage": "https://github.com/kimengumi/redmine-client-bundle",
-  "type": "symfony-bundle",
-  "require": {
-    "php": "^7.4.0",
-    "kbsali/redmine-api": "1.5.*||1.6.*",
-    "html2text/html2text": "^4.2",
-    "symfony/framework-bundle": "^3.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "Kimengumi\\RedmineClientBundle\\": "src"
-    }
-  },
-  "license": "EUPL 1.2",
-  "authors": [
-    {
-      "name": "Antonio Rossetti",
-      "email": "antonio@kimengumi.fr",
-      "homepage": "https://www.kimengumi.fr"
-    }
-  ]
+    "name": "kimengumi/redmine-client-bundle",
+    "description": "Redmine API client bundle for Symfony",
+    "homepage": "https://github.com/kimengumi/redmine-client-bundle",
+    "type": "symfony-bundle",
+    "require": {
+        "php": ">=7.2.5",
+        "kbsali/redmine-api": "1.5.*||1.6.*",
+        "html2text/html2text": ">=4.2.0",
+        "symfony/cache": ">=3.4.0",
+        "symfony/framework-bundle": ">=3.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kimengumi\\RedmineClientBundle\\": "src"
+        }
+    },
+    "license": "EUPL 1.2",
+    "authors": [
+        {
+            "name": "Antonio Rossetti",
+            "email": "antonio@rossetti.fr",
+            "homepage": "https://www.kimengumi.fr"
+        }
+    ]
 }
